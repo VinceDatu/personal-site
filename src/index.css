@@ -1,0 +1,38 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-gradient: linear-gradient(180deg, #b0e1f8 0%, #171827 40%, #0d0e15 100%);
+  --card-bg: #1e2030;
+  --card-radius: 36px;
+  --text-main: #ffffff;
+  --text-muted: #9496a8;
+  --accent-yellow: #7b7a7a;
+  --accent-blue: #2d73ff;
+  --font-family: 'Inter', system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+}
+
+
+#root { width: 100%; }
+

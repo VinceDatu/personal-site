@@ -1,0 +1,200 @@
+import { useEffect } from 'react';
+import * as icons from 'lucide-react';
+import './App.css';
+
+import { FaPython, FaHtml5, FaCss3Alt, FaJs, FaReact, FaBootstrap, FaGithub } from 'react-icons/fa';
+import { SiMysql, SiNestjs } from 'react-icons/si';
+
+function App() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      }
+    );
+
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className='app-container'>
+      <div className='top-section'>
+        <div className='profile-card'>
+          <div className='avatar-container'>
+          <img 
+            src='/profileImage.jpg' 
+            alt='VLD Avatar' 
+            className='avatar-image' 
+          />
+        </div>
+
+        <div className='profile-info'>
+          <h1 className='profile-name'>Vincent Lauren S. Datu</h1>
+          <p className='profile-handle'>BS in Information Technology</p>
+
+          <div className='profile-details'>
+            <div className='detail-item'>
+              <span role="img" aria-label="Location" className='detail-icon'><icons.Cake size={14} /></span>
+              <span>05.05.2003</span>
+            </div>
+            <div className='detail-item'>
+              <span role="img" aria-label="Location" className='detail-icon'><icons.Menu size={14} /></span>
+              <span>Web Developer - IT Support</span>
+            </div>
+            <div className='detail-item'>
+              <span role="img" aria-label="Developer" className='detail-icon'><icons.GraduationCap size={14} /></span>
+              <span>BSIT Graduate at Cavite State University</span>
+            </div>
+            <div className='detail-item tech-stack'>
+              <span role="img" aria-label="Developer" className='detail-icon'></span>
+              <span><icons.Settings size={14} /> Technical skills: </span>
+              <div className='tech-icons'>
+                <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer"><FaPython title="Python" /></a>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer"><FaHtml5 title="HTML5" /></a>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener noreferrer"><FaCss3Alt title="CSS3" /></a>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer"><FaJs title="JavaScript" /></a>
+                <a href="https://www.mysql.com/" target="_blank" rel="noopener noreferrer"><SiMysql title="MySQL" /></a>
+                <a href="https://react.dev/" target="_blank" rel="noopener noreferrer"><FaReact title="ReactJS" /></a>
+                <a href="https://getbootstrap.com/" target="_blank" rel="noopener noreferrer"><FaBootstrap title="Bootstrap" /></a>
+                <a href="https://nestjs.com/" target="_blank" rel="noopener noreferrer"><SiNestjs title="NestJS" /></a>
+                <a href="https://github.com/VinceDatu" target="_blank" rel="noopener noreferrer"><FaGithub title="GitHub" /></a>
+              </div>
+            </div>
+          </div>
+
+          <div className='profile-footer'>
+            <div className='footer-item'>
+              <icons.MapPin size={14} />
+              <span>Taguig, Philippnes</span>
+            </div>
+            <div className='footer-item'>
+              <icons.GraduationCap size={14} />
+              <span>Expected Graduation: July 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className='cards-grid'>
+        <a
+          href='mailto:vincentlaurendatu@gmail.com'
+          className='link-card'
+          style={{ background: '#ffffff', color: '#1e2030' }}
+          aria-label='Compose email to vincentlaurendatu@gmail.com in Gmail'
+          onClick={(e) => {
+            e.preventDefault();
+            const to = encodeURIComponent('vincentlaurendatu@gmail.com');
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}`;
+            // Try to open Gmail compose in a new tab. If blocked/fails,
+            // fall back to the mailto: URL which opens the default mail client.
+            const win = window.open(gmailUrl, '_blank');
+            if (!win) {
+              window.location.href = `mailto:vincentlaurendatu@gmail.com`;
+            }
+          }}
+        >
+          <div className='card-icon email-icon' style={{ border: '1px solid #1e2030' }}>
+            <icons.Mail size={24} color="#1e2030" />
+          </div>
+          <icons.ExternalLink size={16} className='external-icon' color='#1e2030' aria-hidden='true' />
+          <div>
+            <div className='card-title'>Email</div>
+            <div className='card-subtitle' style={{ color: '#6b7280' }}>vincentlaurendatu@gmail.com</div>
+          </div>
+        </a>
+
+        <a href='https://facebook.com/VincentDatuDev' target='_blank' rel='noreferrer' className='link-card' style={{ background: '#1c71f9' }}>
+          <div className='card-icon facebook-icon' style={{ background: 'transparent', border: '1px solid #ffffff' }}>
+            <icons.Facebook size={36} fill='white' stroke='none' />
+          </div>
+          <icons.ExternalLink size={16} className='external-icon' color='#c1d9ff' />
+          <div>
+            <div className='card-title'>Facebook</div>
+            <div className='card-subtitle' style={{ color: '#c1d9ff' }}>@VincentDatuDev</div>
+          </div>
+        </a>
+
+        <a href='/resume.pdf' target='_blank' rel='noreferrer' className='link-card resume-card'>
+          <div className='card-icon' style={{ background: 'transparent', border: '1px solid #ffffff' }}>
+            <icons.FileText size={32} />
+          </div>
+          <div className='resume-info github-info'>
+            <div className='card-title'>Resume</div>
+            <div className='card-subtitle'>View my resume</div>
+          </div>
+          <icons.ExternalLink size={20} className='external-icon' />
+        </a>
+
+        <a href='https://github.com/VinceDatu' target='_blank' rel='noreferrer' className='link-card github-card'>
+          <div className='card-icon'>
+            <icons.Github size={32} />
+          </div>
+          <div className='github-info'>
+            <div className='card-title'>GitHub</div>
+            <div className='card-subtitle'>@VinceDatu</div>
+          </div>
+          <button className='github-follow-btn'>Follow</button>
+        </a>
+      </div>
+      </div>
+
+              <div className='about-section animate-on-scroll'>
+                <h2 className='section-title'><icons.User size={24} /> About Me:</h2>
+                <p className='about-text'>
+                  I am a driven Information Technology graduate with a strong foundation in web development and IT support. 
+                  I have experience and a good foundation in both frontend and backend programming, software and hardware configuration and troubleshooting. 
+                  I am passionate about building efficient, user-centric web applications and managing robust database schemas. 
+                  Always eager to learn and adapt to new technologies to create impactful digital experiences.
+                </p>
+              </div>
+
+              <div className='experience-section'>
+                <h2 className='section-title animate-on-scroll'><icons.BriefcaseBusiness size={24} /> Experiences:</h2>
+              <div className='experience-item animate-on-scroll'>
+                <div className='exp-header'>
+                  <span className='exp-dot'>•</span>
+                  <span className='exp-year'>(2025)</span>
+                </div>
+                <div className='exp-content'>
+                  <div className='exp-title'>CVSU NEXUM: AN EXTENSION SERVICES PORTAL FOR CAVITE STATE UNIVERSITY - IMUS CAMPUS</div>
+                  <div className='exp-subtitle'>Capstone Project</div>
+                  <ul className='exp-list'>
+                    <li>Developed a working portal that showcases the Extension Services of CvSU - Imus</li>
+                    <li>Acted as a fullstack developer handling the frontend, backend programming and the repository schema for the web portal. The project included CRUD operations, and the use of various frameworks.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className='experience-item animate-on-scroll'>
+                <div className='exp-header'>
+                  <span className='exp-dot'>•</span>
+                  <span className='exp-year'>(2021)</span>
+                </div>
+                <div className='exp-content'>
+                  <div className='exp-title'>PRIS: POPULATION REGISTRATION INFORMATION SYSTEM</div>
+                  <div className='exp-subtitle'>Population management system for Barangay Pitogo</div>
+                  <ul className='exp-list'>
+                    <li>Created a Population management system for Barangay Pitogo using Java, which streamlined their census process.</li>
+                    <li>Acted as a fullstack developer handling the frontend, backend programming and the repository schema for the application. The application was developed with Java on the NetBeans IDE.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+    </div>
+  );
+}
+
+export default App;
