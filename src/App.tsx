@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as icons from 'lucide-react';
 import './App.css';
 
@@ -7,6 +7,7 @@ import { SiMysql, SiTypescript, SiCplusplus } from 'react-icons/si';
 
 function App() {
   const gradientRef = useRef<HTMLDivElement | null>(null);
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -29,6 +30,26 @@ function App() {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!isResumeOpen) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsResumeOpen(false);
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isResumeOpen]);
 
   useEffect(() => {
     let frameId = 0;
@@ -171,13 +192,20 @@ function App() {
           </div>
         </a>
 
-        <a href='/CV_Datu.pdf' target='_blank' rel='noreferrer' className='link-card resume-card'>
+        <a
+          href='/CV_Datu.pdf'
+          className='link-card resume-card'
+          onClick={(e) => {
+            e.preventDefault();
+            setIsResumeOpen(true);
+          }}
+        >
           <div className='card-icon' style={{ background: 'transparent', border: '1px solid #ffffff' }}>
             <icons.FileText size={32} />
           </div>
           <div className='resume-info github-info'>
             <div className='card-title'>Resume</div>
-            <div className='card-subtitle'>View my resume</div>
+            <div className='card-subtitle'>View on this page</div>
           </div>
           <icons.ExternalLink size={20} className='external-icon' />
         </a>
@@ -291,6 +319,42 @@ function App() {
           </div>
 
       </div>
+
+      {isResumeOpen && (
+        <div
+          className='resume-modal-overlay'
+          role='dialog'
+          aria-modal='true'
+          aria-label='Resume viewer'
+          onClick={() => setIsResumeOpen(false)}
+        >
+          <div className='resume-modal' onClick={(e) => e.stopPropagation()}>
+            <div className='resume-modal-header'>
+              <h3>Resume</h3>
+              <button
+                type='button'
+                className='resume-modal-close'
+                aria-label='Close resume viewer'
+                onClick={() => setIsResumeOpen(false)}
+              >
+                <icons.X size={20} />
+              </button>
+            </div>
+
+            <iframe
+              className='resume-modal-frame'
+              src='/CV_Datu.pdf#view=FitH'
+              title='Resume PDF'
+            />
+
+            <div className='resume-modal-actions'>
+              <a href='/CV_Datu.pdf' target='_blank' rel='noreferrer'>
+                Open in new tab
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

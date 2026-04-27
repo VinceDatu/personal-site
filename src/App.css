@@ -699,3 +699,88 @@
     opacity: 0.3;
   }
 }
+
+.resume-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 16, 0.76);
+  backdrop-filter: blur(2px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 999;
+}
+
+.resume-modal {
+  width: min(980px, 100%);
+  height: min(88vh, 860px);
+  background: #151727;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.45);
+}
+
+.resume-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.resume-modal-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #f3f4f6;
+}
+
+.resume-modal-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  color: #f3f4f6;
+  cursor: pointer;
+}
+
+.resume-modal-frame {
+  width: 100%;
+  flex: 1;
+  border: 0;
+  background: #0f111b;
+}
+
+.resume-modal-actions {
+  padding: 10px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.resume-modal-actions a {
+  color: #dbe7ff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .resume-modal-overlay {
+    padding: 10px;
+  }
+
+  .resume-modal {
+    width: 100%;
+    height: 92vh;
+    border-radius: 12px;
+  }
+}
