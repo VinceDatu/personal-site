@@ -1,11 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import * as icons from 'lucide-react';
 import './App.css';
 
-import { FaPython, FaHtml5, FaCss3Alt, FaJs, FaReact, FaBootstrap, FaGithub } from 'react-icons/fa';
-import { SiMysql, SiNestjs } from 'react-icons/si';
+import { FaPython, FaHtml5, FaCss3Alt, FaJs, FaReact, FaBootstrap, FaGithub, FaPhp, FaJava, FaNodeJs } from 'react-icons/fa';
+import { SiMysql, SiTypescript, SiCplusplus } from 'react-icons/si';
 
 function App() {
+  const [gradientOpacity, setGradientOpacity] = useState(1);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -28,8 +30,27 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      // Calculate opacity based on scroll distance.
+      // E.g., gradient fully fades out after 300px of scrolling down.
+      const scrollY = window.scrollY;
+      const newOpacity = Math.max(0, 1 - scrollY / 300);
+      setGradientOpacity(newOpacity);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className='app-container'>
+    <>
+      <div 
+        className='fixed-gradient-bg' 
+        style={{ opacity: gradientOpacity }} 
+        aria-hidden='true' 
+      />
+      <div className='app-container'>
       <div className='top-section'>
         <div className='profile-card'>
           <div className='avatar-container'>
@@ -61,14 +82,18 @@ function App() {
               <span role="img" aria-label="Developer" className='detail-icon'></span>
               <span><icons.Settings size={14} /> Technical skills: </span>
               <div className='tech-icons'>
-                <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer"><FaPython title="Python" /></a>
                 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" rel="noopener noreferrer"><FaHtml5 title="HTML5" /></a>
                 <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noopener noreferrer"><FaCss3Alt title="CSS3" /></a>
+                <a href="https://www.php.net/" target="_blank" rel="noopener noreferrer"><FaPhp title="PHP" /></a>
                 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noopener noreferrer"><FaJs title="JavaScript" /></a>
+                <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener noreferrer"><SiTypescript title="TypeScript" /></a>
+                <a href="https://www.python.org/" target="_blank" rel="noopener noreferrer"><FaPython title="Python" /></a>
+                <a href="https://www.java.com/" target="_blank" rel="noopener noreferrer"><FaJava title="Java" /></a>
+                <a href="https://isocpp.org/" target="_blank" rel="noopener noreferrer"><SiCplusplus title="C++" /></a>
                 <a href="https://www.mysql.com/" target="_blank" rel="noopener noreferrer"><SiMysql title="MySQL" /></a>
                 <a href="https://react.dev/" target="_blank" rel="noopener noreferrer"><FaReact title="ReactJS" /></a>
                 <a href="https://getbootstrap.com/" target="_blank" rel="noopener noreferrer"><FaBootstrap title="Bootstrap" /></a>
-                <a href="https://nestjs.com/" target="_blank" rel="noopener noreferrer"><SiNestjs title="NestJS" /></a>
+                <a href="https://nodejs.org/" target="_blank" rel="noopener noreferrer"><FaNodeJs title="Node.js" /></a>
                 <a href="https://github.com/VinceDatu" target="_blank" rel="noopener noreferrer"><FaGithub title="GitHub" /></a>
               </div>
             </div>
@@ -77,11 +102,11 @@ function App() {
           <div className='profile-footer'>
             <div className='footer-item'>
               <icons.MapPin size={14} />
-              <span>Taguig, Philippnes</span>
+              <span>Taguig, Philippines</span>
             </div>
             <div className='footer-item'>
               <icons.GraduationCap size={14} />
-              <span>Expected Graduation: July 2026</span>
+              <span>Expected Graduation: Sept 2026</span>
             </div>
           </div>
         </div>
@@ -126,7 +151,7 @@ function App() {
           </div>
         </a>
 
-        <a href='/Datu_CV.pdf' target='_blank' rel='noreferrer' className='link-card resume-card'>
+        <a href='/CV_Datu.pdf' target='_blank' rel='noreferrer' className='link-card resume-card'>
           <div className='card-icon' style={{ background: 'transparent', border: '1px solid #ffffff' }}>
             <icons.FileText size={32} />
           </div>
@@ -153,7 +178,7 @@ function App() {
               <div className='about-section animate-on-scroll'>
                 <h2 className='section-title'><icons.User size={24} /> About Me:</h2>
                 <p className='about-text'>
-                  I am a driven Information Technology graduate with a strong foundation in web development and IT support. 
+                  I am a driven Information Technology graduate with a strong foundation in web development, Networking and IT support. 
                   I have experience and a good foundation in both frontend and backend programming, software and hardware configuration and troubleshooting. 
                   I am passionate about building efficient, user-centric web applications and managing robust database schemas. 
                   Always eager to learn and adapt to new technologies to create impactful digital experiences.
@@ -162,36 +187,6 @@ function App() {
 
               <div className='experience-section'>
                 <h2 className='section-title animate-on-scroll'><icons.BriefcaseBusiness size={24} /> Experiences:</h2>
-              
-              <div className='experience-item animate-on-scroll'>
-                <div className='exp-header'>
-                  <span className='exp-dot'>•</span>
-                  <span className='exp-year'>(August 2021 - November 2021)</span>
-                </div>
-                <div className='exp-content'>
-                  <div className='exp-title'>PRIS: POPULATION REGISTRATION INFORMATION SYSTEM</div>
-                  <div className='exp-subtitle'>Population management system for Barangay Pitogo</div>
-                  <ul className='exp-list'>
-                    <li>Created a Population management system for Barangay Pitogo using Java, which streamlined their census process.</li>
-                    <li>Acted as a fullstack developer handling the frontend, backend programming and the repository schema for the application. The application was developed with Java on the NetBeans IDE.</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className='experience-item animate-on-scroll'>
-                <div className='exp-header'>
-                  <span className='exp-dot'>•</span>
-                  <span className='exp-year'>(2025)</span>
-                </div>
-                <div className='exp-content'>
-                  <div className='exp-title'>CVSU NEXUM: AN EXTENSION SERVICES PORTAL FOR CAVITE STATE UNIVERSITY - IMUS CAMPUS</div>
-                  <div className='exp-subtitle'>Capstone Project</div>
-                  <ul className='exp-list'>
-                    <li>Developed a working portal that showcases the Extension Services of CvSU - Imus</li>
-                    <li>Acted as a fullstack developer handling the frontend, backend programming and the repository schema for the web portal. The project included CRUD operations, and the use of various frameworks.</li>
-                  </ul>
-                </div>
-              </div>
 
               <div className='experience-item animate-on-scroll'>
                 <div className='exp-header'>
@@ -212,9 +207,48 @@ function App() {
                   </ul>
                 </div>
               </div>
+
+              <div className='experience-item animate-on-scroll'>
+                <div className='exp-header'>
+                  <span className='exp-dot'>•</span>
+                  <span className='exp-year'>(August 2021 - November 2021)</span>
+                </div>
+                <div className='exp-content'>
+                  <div className='exp-title'>PRIS: POPULATION REGISTRATION INFORMATION SYSTEM</div>
+                  <div className='exp-subtitle'>Population management system for Barangay Pitogo</div>
+                  <ul className='exp-list'>
+                    <li>Created a Population management system for Barangay Pitogo using Java, which streamlined their census process.</li>
+                    <li>Acted as a fullstack developer handling the frontend, backend programming and the repository schema for the application. The application was developed with Java on the NetBeans IDE.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
 
-    </div>
+            <div className='experience-section'>
+              <h2 className='section-title animate-on-scroll'><icons.GraduationCap size={24} /> Education:</h2>
+              
+              <div className='experience-item animate-on-scroll'>
+                <div className='exp-header'>
+                  <span className='exp-dot'>•</span>
+                  <span className='exp-year'>(2022 - 2026)</span>
+                </div>
+                <div className='exp-content'>
+                  <div className='exp-title'>Bachelor of Science in Information Technology</div>
+                  <div className='exp-subtitle'>Cavite State University - Imus Campus</div>
+                  <ul className='exp-list'>
+                    <li>Expected Graduation: September 2026</li>
+                    <li>Developed CVSU NEXUM: An Extension Services Portal For Cavite State University -
+                        Imus Campus as a capstone project. This aimed to showcase the various extension
+                        services by the campus.</li>
+                    <li>Relevant Coursework: Web Development, Database Management, Networking, IU/UX Design.</li>
+                    <li>Designed responsive websites using HTML, CSS, JavaScript and other langauges listed in Skills.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+      </div>
+    </>
   );
 }
 
