@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import * as icons from 'lucide-react';
 import './App.css';
 
@@ -6,7 +6,7 @@ import { FaPython, FaHtml5, FaCss3Alt, FaJs, FaReact, FaBootstrap, FaGithub, FaP
 import { SiMysql, SiTypescript, SiCplusplus } from 'react-icons/si';
 
 function App() {
-  const [gradientOpacity, setGradientOpacity] = useState(1);
+  const gradientRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -31,23 +31,43 @@ function App() {
   }, []);
 
   useEffect(() => {
+    let frameId = 0;
+
     const handleScroll = () => {
-      // Calculate opacity based on scroll distance.
-      // E.g., gradient fully fades out after 300px of scrolling down.
-      const scrollY = window.scrollY;
-      const newOpacity = Math.max(0, 1 - scrollY / 300);
-      setGradientOpacity(newOpacity);
+      if (frameId !== 0) {
+        return;
+      }
+
+      frameId = window.requestAnimationFrame(() => {
+        const fadeDistance = 420;
+        const rawProgress = Math.min(Math.max(window.scrollY / fadeDistance, 0), 1);
+        const easedProgress = rawProgress * rawProgress * (3 - 2 * rawProgress);
+        const opacity = 1 - easedProgress;
+
+        if (gradientRef.current) {
+          gradientRef.current.style.opacity = `${opacity}`;
+        }
+
+        frameId = 0;
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      if (frameId !== 0) {
+        window.cancelAnimationFrame(frameId);
+      }
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
     <>
       <div 
+        ref={gradientRef}
         className='fixed-gradient-bg' 
-        style={{ opacity: gradientOpacity }} 
         aria-hidden='true' 
       />
       <div className='app-container'>
@@ -175,7 +195,10 @@ function App() {
       </div>
       </div>
 
-              <div className='about-section animate-on-scroll'>
+            <div className='lower-sections'>
+              <div className='lower-ambient-bg animate-on-scroll' aria-hidden='true' />
+
+              <div className='about-section animate-on-scroll scroll-enhanced'>
                 <h2 className='section-title'><icons.User size={24} /> About Me:</h2>
                 <p className='about-text'>
                   I am a driven Information Technology graduate with a strong foundation in web development, Networking and IT support. 
@@ -185,7 +208,7 @@ function App() {
                 </p>
               </div>
 
-              <div className='experience-section'>
+              <div className='experience-section animate-on-scroll scroll-enhanced'>
                 <h2 className='section-title animate-on-scroll'><icons.BriefcaseBusiness size={24} /> Experiences:</h2>
 
               <div className='experience-item animate-on-scroll'>
@@ -224,7 +247,7 @@ function App() {
               </div>
             </div>
 
-            <div className='experience-section'>
+            <div className='experience-section animate-on-scroll scroll-enhanced'>
               <h2 className='section-title animate-on-scroll'><icons.GraduationCap size={24} /> Education:</h2>
               
               <div className='experience-item animate-on-scroll'>
@@ -265,6 +288,7 @@ function App() {
                 </div>
               </div>
             </div>
+          </div>
 
       </div>
     </>
