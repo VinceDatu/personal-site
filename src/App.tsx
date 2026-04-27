@@ -233,8 +233,27 @@ function App() {
                   <span className='exp-year'>(2022 - 2026)</span>
                 </div>
                 <div className='exp-content'>
-                  <div className='exp-title'>Bachelor of Science in Information Technology</div>
-                  <div className='exp-subtitle'>Cavite State University - Imus Campus</div>
+                  <div className='exp-title'>Cavite State University - Imus Campus</div>
+                  <div className='exp-subtitle'>Bachelor of Science in Information Technology</div>
+                  <ul className='exp-list'>
+                    <li>Expected Graduation: September 2026</li>
+                    <li>Developed CVSU NEXUM: An Extension Services Portal For Cavite State University -
+                        Imus Campus as a capstone project. This aimed to showcase the various extension
+                        services by the campus.</li>
+                    <li>Relevant Coursework: Web Development, Database Management, Networking, IU/UX Design.</li>
+                    <li>Designed responsive websites using HTML, CSS, JavaScript and other langauges listed in Skills.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className='experience-item animate-on-scroll'>
+                <div className='exp-header'>
+                  <span className='exp-dot'>•</span>
+                  <span className='exp-year'>(2020 - 2022)</span>
+                </div>
+                <div className='exp-content'>
+                  <div className='exp-title'>SHS in San Nicholas III</div>
+                  <div className='exp-subtitle'>TVL - Information and Communications Technology</div>
                   <ul className='exp-list'>
                     <li>Expected Graduation: September 2026</li>
                     <li>Developed CVSU NEXUM: An Extension Services Portal For Cavite State University -
