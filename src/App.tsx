@@ -126,7 +126,7 @@ function App() {
           </div>
         </a>
 
-        <a href='/resume.pdf' target='_blank' rel='noreferrer' className='link-card resume-card'>
+        <a href='/Datu_CV.pdf' target='_blank' rel='noreferrer' className='link-card resume-card'>
           <div className='card-icon' style={{ background: 'transparent', border: '1px solid #ffffff' }}>
             <icons.FileText size={32} />
           </div>
@@ -162,6 +162,22 @@ function App() {
 
               <div className='experience-section'>
                 <h2 className='section-title animate-on-scroll'><icons.BriefcaseBusiness size={24} /> Experiences:</h2>
+              
+              <div className='experience-item animate-on-scroll'>
+                <div className='exp-header'>
+                  <span className='exp-dot'>•</span>
+                  <span className='exp-year'>(August 2021 - November 2021)</span>
+                </div>
+                <div className='exp-content'>
+                  <div className='exp-title'>PRIS: POPULATION REGISTRATION INFORMATION SYSTEM</div>
+                  <div className='exp-subtitle'>Population management system for Barangay Pitogo</div>
+                  <ul className='exp-list'>
+                    <li>Created a Population management system for Barangay Pitogo using Java, which streamlined their census process.</li>
+                    <li>Acted as a fullstack developer handling the frontend, backend programming and the repository schema for the application. The application was developed with Java on the NetBeans IDE.</li>
+                  </ul>
+                </div>
+              </div>
+
               <div className='experience-item animate-on-scroll'>
                 <div className='exp-header'>
                   <span className='exp-dot'>•</span>
@@ -180,14 +196,19 @@ function App() {
               <div className='experience-item animate-on-scroll'>
                 <div className='exp-header'>
                   <span className='exp-dot'>•</span>
-                  <span className='exp-year'>(2021)</span>
+                  <span className='exp-year'>(February 2026 - PRESENT (May 2026 expected finish))</span>
                 </div>
                 <div className='exp-content'>
-                  <div className='exp-title'>PRIS: POPULATION REGISTRATION INFORMATION SYSTEM</div>
-                  <div className='exp-subtitle'>Population management system for Barangay Pitogo</div>
+                  <div className='exp-title'>Tech Internship, Telematico Corporation</div>
+                  <div className='exp-subtitle'>Mandaluyong City</div>
                   <ul className='exp-list'>
-                    <li>Created a Population management system for Barangay Pitogo using Java, which streamlined their census process.</li>
-                    <li>Acted as a fullstack developer handling the frontend, backend programming and the repository schema for the application. The application was developed with Java on the NetBeans IDE.</li>
+                    <li>Learned about Networking fundamentals and Telephony under the professionals of
+                        Telematico Corporation. Gained hands on experience with Networking basics and
+                        Telephony solutions with the Grandstream platform.</li>
+                    <li>General IT Support: Assisting daily operations and troubleshooting hardware(Printers and laptops).</li>
+                    <li>Telephony Solutions: Shadowed and assisted in configuration of Grandstream devices as a Telephony Solution. 
+                        Which included IP phones, gateways and PBX systems. Gained experience in configuring and troubleshooting these devices to ensure optimal performance and reliability.</li>
+                    <li>Web Development: Optimized, updated and managed the company website “telematico.com.ph”. This involved maintaining the site's content, improving its performance, and ensuring its availability.</li>
                   </ul>
                 </div>
               </div>
